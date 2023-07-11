@@ -1,0 +1,170 @@
+<template>
+   <lightning-card variant="Narrow">
+       <lightning-layout multiple-rows>
+           <lightning-layout-item
+               size="12"
+               padding="around-small"
+           >
+               <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                   <thead>
+                       <tr class="slds-line-height_reset">
+                           <td colspan="3">
+                               <lightning-input
+                                   type="search"
+                                   variant="standard"
+                                   name="allfieldSearch"
+                                   label="Search All Fields"
+                                   placeholder="type text..."
+                                   min-length="3"
+                                   message-when-range-underflow="Type min 3 chars"
+                                   value={searchAllValue}
+                                   onchange={handleSearchAll}
+                               ></lightning-input>
+                           </td>
+                           <td colspan="3">The "Search all fields" searches in local data only, use below filters to
+                               get data from server</td>
+                       </tr>
+                       <tr class="slds-line-height_reset">
+                           <td
+                               scope="col"
+                               style="width: 20px"
+                           >
+                               <lightning-button-icon
+                                   variant="base"
+                                   size="small"
+                                   icon-name="utility:clear"
+                                   alternative-text="Clear Search"
+                                   onclick={clearSearch}
+                               ></lightning-button-icon>
+                           </td>
+                           <td scope="col">
+                               <lightning-input
+                                   type="text"
+                                   variant="standard"
+                                   name="productName"
+                                   value={productName}
+                                   label="Search Product Name"
+                                   placeholder="type product name..."
+                                   onkeyup={handleKeyUp}
+                               ></lightning-input>
+                           </td>
+                           <td scope="col">
+                               <lightning-input
+                                   type="text"
+                                   variant="standard"
+                                   name="productCode"
+                                   value={productCode}
+                                   label="Search Product Code"
+                                   placeholder="Product Code..."
+                                   onkeyup={handleKeyUp}
+                               ></lightning-input>
+                           </td>
+                           <td scope="col">
+                               <lightning-input
+                                   type="text"
+                                   variant="standard"
+                                   name="productListPrice"
+                                   value={productListPrice}
+                                   label="Search Product Price"
+                                   placeholder="Product Price..."
+                                   onkeyup={handleKeyUp}
+                               ></lightning-input>
+                           </td>
+                           <td scope="col">
+                               <lightning-input
+                                   type="text"
+                                   variant="standard"
+                                   name="productDescription"
+                                   value={productDescription}
+                                   label="Search Product Description"
+                                   placeholder="Product Description..."
+                                   onkeyup={handleKeyUp}
+                               ></lightning-input>
+                           </td>
+                           <td scope="col">
+                               <lightning-combobox
+                                   name="productFamily"
+                                   label="Family"
+                                   value={productFamily}                                   
+                                   placeholder="Search Family"                                   
+                                   options={productFamilyPickListValues}
+                                   onchange={handleChange}
+                                ></lightning-combobox>
+                           </td>
+                       </tr>
+                       <tr class="slds-line-height_reset">
+                           <th scope="col">Index</th>
+                           <th scope="col">Product Name</th>
+                           <th scope="col">Product Code</th>
+                           <th scope="col">List Price</th>
+                           <th scope="col">Product Description</th>
+                           <th scope="col">Product Family</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr
+                           class="slds-hint-parent"
+                           for:each={searchable}
+                           for:item="item"
+                           key={item.Id}
+                       >
+                           <td scope="col">{item.index}</td>
+                           <th scope="row">
+                               <a
+                                   href="#"
+                                   onclick={handleNavigate}
+                                   data-id={item.productData.Product2.Name}
+                               >{item.productData.Product2.Name}
+                               </a>
+                           </th>
+                           <th scope="row">
+                               <span if:true={item.productData.Product2.ProductCode}>
+                                   <a
+                                       href="#"
+                                       onclick={handleNavigate}
+                                       data-id={item.productData.Product2.ProductCode}
+                                   >
+                                       {item.productData.Product2.ProductCode}
+                                   </a>
+                               </span>
+                           </th>
+                           <th scope="row">
+                               <span if:true={item.productData.UnitPrice}>
+                                   <a
+                                       href="#"
+                                       onclick={handleNavigate}
+                                       data-id={item.productData.UnitPrice}
+                                   >
+                                       {item.productData.UnitPrice}
+                                   </a>
+                               </span>
+                           </th>
+                           <th scope="row">
+                            <span if:true={item.productData.Product2.Description}>
+                                <a
+                                    href="#"
+                                    onclick={handleNavigate}
+                                    data-id={item.productData.Product2.Description}
+                                >
+                                    {item.productData.Product2.Description}
+                                </a>
+                            </span>
+                        </th>
+                        <th scope="row">
+                            <span if:true={item.productData.Product2.Family}>
+                                <a
+                                    href="#"
+                                    onclick={handleNavigate}
+                                    data-id={item.productData.Product2.Family}
+                                >
+                                    {item.productData.Product2.Family}
+                                </a>
+                            </span>
+                        </th>
+                       </tr>
+                   </tbody>
+               </table>
+           </lightning-layout-item>
+       </lightning-layout>
+   </lightning-card>
+</template>
